@@ -1,15 +1,17 @@
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 
-import GuessLayout from '../components/layout/guess'
+import GuessLayout from '../../components/layout/guess'
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const { handleSubmit, register, errors } = useForm();
   const onSubmit = (values: any) => console.log(values);
 
   return (
     <GuessLayout title="Sign In">
-      <h1 className="text-center text-4xl mb-10 w-full">Sign In</h1>
+      <h1 className="text-center text-4xl mb-10 w-full">
+        Create an account
+      </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="mb-5">
@@ -44,6 +46,32 @@ const SignInPage = () => {
 
         <div className="mb-5">
           <input
+            type="text"
+            placeholder="Full Name"
+            name="fullName"
+            ref={register({
+              required: "The full name field is required."
+            })}
+            className="
+              border
+              border-gray-400
+              rounded
+              w-full
+              h-12
+              px-3
+              py-4
+              focus:outline-none
+              focus:border-pink-400
+            "
+          />
+
+          <div className="text-red-600 mt-2 text-sm">
+            {errors.fullName && errors.fullName.message}
+          </div>
+        </div>
+
+        <div className="mb-5">
+          <input
             type="password"
             className="
               border
@@ -69,15 +97,15 @@ const SignInPage = () => {
         </div>
 
         <div className="text-gray-600 mb-5 text-sm">
-          New user?
+          Already have an account?
 
-          <Link href='/sign-up'>
+          <Link href='/'>
             <a className="
               ml-1
               text-pink-400
               hover:text-pink-500
               focus:text-pink-600
-            ">Create an account</a>
+            ">Sign In</a>
           </Link>
         </div>
 
@@ -103,4 +131,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default SignUpPage
