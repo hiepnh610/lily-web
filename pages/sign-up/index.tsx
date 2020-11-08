@@ -1,11 +1,21 @@
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
 
+import services from '../../services'
 import GuessLayout from '../../components/layout/guess'
+import { SignUpModel } from '../../interfaces'
 
 const SignUpPage = () => {
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (values: any) => console.log(values);
+  const onSubmit = (values: SignUpModel): void => {
+    const token = services.authService.signUpServices(values);
+
+    token.then((data: string): void => {
+      console.log(data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
 
   return (
     <GuessLayout title="Sign In">
@@ -125,7 +135,7 @@ const SignUpPage = () => {
             ease-linear
             text-center
           "
-        >Submit</button>
+        >Create Account</button>
       </form>
     </GuessLayout>
   )

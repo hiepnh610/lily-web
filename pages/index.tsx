@@ -97,7 +97,7 @@ const SignInPage = () => {
             ease-linear
             text-center
           "
-        >Submit</button>
+        >Sign In</button>
       </form>
     </GuessLayout>
   )
